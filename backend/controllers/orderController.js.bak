@@ -1,0 +1,185 @@
+import OrderDetails from '../models/OrderDetails.js';
+import ExamDetails from '../models/ExamDetails.js';
+import { v4 as uuidv4 } from 'uuid';
+
+// Create a new order
+export const createOrder = async (req, res) => {
+  try {
+    const {
+      email,
+      orderTime,
+      items,
+      totalAmount,
+      canteenId,
+      examId,
+      priority,
+      priorityReason,
+      priorityDetails,
+      pickupTime,
+      specialInstructions
+    } = req.body;
+
+    // Create new order with a unique orderId
+    const newOrder = new OrderDetails({
+      orderId: uuidv4(), // Explicitly set a unique UUID for orderId
+      email,
+      orderTime,
+      items,
+      totalAmount,
+      canteenId,
+      examId,
+      priority,
+      priorityReason,
+      priorityDetails,
+      pickupTime,
+      specialInstructions
+    });
+
+    // Save order to database
+    await newOrder.save();
+
+    // If it's a priority order, send notification to canteen staff (implementation would depend on notification system)
+    if (priority) {
+      // This would be implemented with a real-time notification system like Socket.io
+      console.log(`PRIORITY ORDER ALERT: Order ${newOrder._id} is a priority order. Reason: ${priorityReason}`);
+    }
+
+    res.status(201).json({
+      message: 'Order created successfully',
+      order: newOrder
+    });
+  } catch (error) {
+    console.error('Error creating order:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+// Get all orders
+export const getAllOrders = async (req, res) => {
+  try {
+    const orders = await OrderDetails.find()
+      .populate('canteenId', 'name location')
+      .populate('items.itemId', 'itemName price');
+
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error('Error getting all orders:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+// Get orders by user email
+export const getOrdersByUser = async (req, res) => {
+  try {
+    const orders = await OrderDetails.find({ email: req.params.email })
+      .populate('canteenId', 'name location')
+      .populate('items.itemId', 'itemName price')
+      .sort({ createdAt: -1 });
+
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error('Error getting orders by user:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+// Get orders by canteen ID
+export const getOrdersByCanteen = async (req, res) => {
+  try {
+    const orders = await OrderDetails.find({ canteenId: req.params.canteenId })
+      .populate('items.itemId', 'itemName price')
+      .sort({ priority: -1, createdAt: -1 }); // Sort by priority first, then by creation date
+
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error('Error getting orders by canteen:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+// Get priority orders by canteen ID
+export const getPriorityOrdersByCanteen = async (req, res) => {
+  try {
+    const priorityOrders = await OrderDetails.find({
+      canteenId: req.params.canteenId,
+      priority: true,
+      status: { $nin: ['delivered', 'cancelled'] } // Only get active priority orders
+    })
+      .populate('items.itemId', 'itemName price')
+      .sort({ createdAt: 1 }); // Oldest first to ensure they're handled in order
+
+    res.status(200).json(priorityOrders);
+  } catch (error) {
+    console.error('Error getting priority orders by canteen:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+// Get order by ID
+export const getOrderById = async (req, res) => {
+  try {
+    const order = await OrderDetails.findById(req.params.id)
+      .populate('canteenId', 'name location')
+      .populate('items.itemId', 'itemName price');
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    res.status(200).json(order);
+  } catch (error) {
+    console.error('Error getting order by ID:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+// Update order status
+export const updateOrderStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
+
+    // Find and update order status
+    const updatedOrder = await OrderDetails.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true }
+    ).populate('canteenId', 'name location')
+      .populate('items.itemId', 'itemName price');
+
+    if (!updatedOrder) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    res.status(200).json({
+      message: `Order status updated to ${status}`,
+      order: updatedOrder
+    });
+  } catch (error) {
+    console.error('Error updating order status:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+// Cancel order
+export const cancelOrder = async (req, res) => {
+  try {
+    // Find and update order status to cancelled
+    const cancelledOrder = await OrderDetails.findByIdAndUpdate(
+      req.params.id,
+      { status: 'cancelled' },
+      { new: true }
+    );
+
+    if (!cancelledOrder) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    res.status(200).json({
+      message: 'Order cancelled successfully',
+      order: cancelledOrder
+    });
+  } catch (error) {
+    console.error('Error cancelling order:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};

@@ -1,0 +1,684 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
+		"name": "KLE Canteen API",
+		"description": "API collection for KLE Canteen application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test Endpoints",
+			"item": [
+				{
+					"name": "Root Endpoint",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:5000/",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": [""]
+						},
+						"description": "Check if API is working"
+					},
+					"response": []
+				},
+				{
+					"name": "API Test",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:5000/api/test",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "test"]
+						},
+						"description": "Test API endpoint"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin API Test",
+					"request": {
+						"method": "POST",
+						"url": {
+							"raw": "http://localhost:5000/api/admin-test",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["api", "admin-test"]
+						},
+						"description": "Test admin API endpoint"
+					},
+					"response": []
+				},
+				{
+					"name": "Static File",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:5000/uploads/:filename",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "5000",
+							"path": ["uploads", ":filename"],
+							"variable": [
+								{
+									"key": "filename",
+									"value": "image.jpg"
+								}
+							]
+						},
+						"description": "Get static file from uploads directory"
+					},
+					"response": []
+				}
+			],
+			"description": "Test endpoints to check if API is working"
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Admin Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"adminpassword\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/admin/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin",
+								"login"
+							]
+						},
+						"description": "Login as admin"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Admin Name\",\n  \"email\": \"admin@example.com\",\n  \"password\": \"adminpassword\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/admin/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin",
+								"register"
+							]
+						},
+						"description": "Register a new admin"
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"student@kletech.ac.in\",\n  \"password\": \"userpassword\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": "Login as user"
+					},
+					"response": []
+				},
+				{
+					"name": "User Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"User Name\",\n  \"email\": \"student@kletech.ac.in\",\n  \"phoneNo\": \"1234567890\",\n  \"password\": \"userpassword\",\n  \"role\": \"student\",\n  \"department\": \"CSE\",\n  \"semester\": \"6\",\n  \"isPrivileged\": false\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						},
+						"description": "Register a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "Canteen Staff Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"staff@example.com\",\n  \"password\": \"staffpassword\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/canteen-staff/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"canteen-staff",
+								"login"
+							]
+						},
+						"description": "Login as canteen staff"
+					},
+					"response": []
+				}
+			],
+			"description": "Authentication endpoints"
+		},
+		{
+			"name": "User Management",
+			"item": [
+				{
+					"name": "Get User Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/users/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						},
+						"description": "Get user profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Name\",\n  \"email\": \"updated@kletech.ac.in\",\n  \"phoneNo\": \"9876543210\",\n  \"department\": \"ECE\",\n  \"semester\": \"7\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						},
+						"description": "Update user profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Get all users (admin only)"
+					},
+					"response": []
+				}
+			],
+			"description": "User management endpoints"
+		},
+		{
+			"name": "Admin Management",
+			"item": [
+				{
+					"name": "Get Admin Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/admin/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin",
+								"profile"
+							]
+						},
+						"description": "Get admin profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Admin Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Admin\",\n  \"email\": \"updated_admin@example.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/admin/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin",
+								"profile"
+							]
+						},
+						"description": "Update admin profile"
+					},
+					"response": []
+				}
+			],
+			"description": "Admin management endpoints"
+		},
+		{
+			"name": "Canteen Staff Management",
+			"item": [
+				{
+					"name": "Register Canteen Staff",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Staff Name\",\n  \"email\": \"staff@example.com\",\n  \"password\": \"staffpassword\",\n  \"canteenId\": \"{{canteenId}}\",\n  \"contactNumber\": \"1234567890\",\n  \"memberId\": \"STAFF123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/canteen-staff/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"canteen-staff",
+								"register"
+							]
+						},
+						"description": "Register a new canteen staff (admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Canteen Staff Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{staffToken}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/canteen-staff/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"canteen-staff",
+								"profile"
+							]
+						},
+						"description": "Get canteen staff profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Canteen Staff Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{staffToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Staff\",\n  \"email\": \"updated_staff@example.com\",\n  \"contactNumber\": \"9876543210\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/canteen-staff/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"canteen-staff",
+								"profile"
+							]
+						},
+						"description": "Update canteen staff profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Canteen Staff",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/canteen-staff",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"canteen-staff"
+							]
+						},
+						"description": "Get all canteen staff (admin only)"
+					},
+					"response": []
+				}
+			],
+			"description": "Canteen staff management endpoints"
+		},
+		{
+			"name": "Canteen Management",
+			"item": [
+				{
+					"name": "Get All Canteens",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/canteens",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"canteens"
+							]
+						},
+						"description": "Get all canteens"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Canteen by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/canteens/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"canteens",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "canteen_id"
+								}
+							]
+						},
+						"description": "Get canteen by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Canteen",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Main Canteen",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Main Building",
+									"type": "text"
+								},
+								{
+									"key": "contactNumber",
+									"value": "1234567890",
+									"type": "text"
+								},
+								{
+									"key": "openingTime",
+									"value": "8:00 AM",
+									"type": "text"
+								},
+								{
+									"key": "closingTime",
+									"value": "6:00 PM",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/canteens",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"canteens"
+							]
+						},
+						"description": "Create a new canteen (admin only)"
+					},
+					"response": []
+				}
+			],
+			"description": "Canteen management endpoints"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "adminToken",
+			"value": "your_admin_token_here"
+		},
+		{
+			"key": "userToken",
+			"value": "your_user_token_here"
+		},
+		{
+			"key": "staffToken",
+			"value": "your_staff_token_here"
+		}
+	]
+}

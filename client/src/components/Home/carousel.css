@@ -1,0 +1,133 @@
+/* Custom styles for the carousel */
+.menu-carousel-container {
+  margin: 0 auto;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.menu-carousel {
+  position: relative;
+  padding: 0 30px; /* Add padding to make room for arrows */
+}
+
+.menu-carousel .slick-slide {
+  padding: 10px;
+}
+
+/* Arrow container styling */
+.menu-carousel .slick-prev,
+.menu-carousel .slick-next {
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  opacity: 0; /* Start with invisible arrows */
+  transform: translateY(-50%);
+}
+
+/* Show arrows on carousel hover */
+.menu-carousel:hover .slick-prev,
+.menu-carousel:hover .slick-next {
+  opacity: 0.7;
+}
+
+.menu-carousel .slick-prev:hover,
+.menu-carousel .slick-next:hover {
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  opacity: 1;
+  transform: translateY(-50%) scale(1.05);
+}
+.menu-carousel .slick-prev{
+  margin-left: -35px;
+}
+.menu-carousel .slick-next{
+  margin-right: -35px;
+}
+
+/* Position arrows at the sides */
+.menu-carousel .slick-prev {
+  left: 5px;
+  z-index: 20;
+}
+
+.menu-carousel .slick-next {
+  right: 5px;
+  z-index: 20;
+}
+
+/* Ensure arrows are above card content */
+.menu-carousel .slick-arrow {
+  position: absolute;
+  top: 50%;
+}
+
+.menu-carousel .slick-prev:before,
+.menu-carousel .slick-next:before {
+  color: #333;
+  font-size: 20px;
+  opacity: 1;
+}
+
+.menu-carousel .slick-dots {
+  bottom: -30px;
+}
+
+.menu-carousel .slick-dots li button:before {
+  font-size: 10px;
+  color: #ccc;
+  opacity: 0.5;
+}
+
+.menu-carousel .slick-dots li.slick-active button:before {
+  color: #666;
+  opacity: 1;
+}
+
+/* Add some animation to the carousel items */
+.menu-carousel .slick-slide {
+  opacity: 0.5;
+  transform: scale(0.95);
+  transition: all 0.3s ease;
+}
+
+.menu-carousel .slick-slide.slick-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.menu-carousel .slick-slide.slick-center {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .menu-carousel {
+    padding: 0 25px; /* Slightly smaller padding on mobile */
+  }
+
+  .menu-carousel .slick-prev {
+    left: 2px;
+  }
+
+  .menu-carousel .slick-next {
+    right: 2px;
+  }
+
+  .menu-carousel .slick-prev,
+  .menu-carousel .slick-next {
+    width: 30px;
+    height: 30px;
+    /* Make arrows always visible on mobile for better usability */
+    opacity: 0.7;
+  }
+
+  .menu-carousel .slick-prev:before,
+  .menu-carousel .slick-next:before {
+    font-size: 16px;
+  }
+}
