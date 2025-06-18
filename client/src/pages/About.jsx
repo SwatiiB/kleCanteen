@@ -20,7 +20,7 @@ const About = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-800"></div>
         <div className="absolute inset-0 bg-[url('/src/assets/pattern-dots.png')] opacity-10"></div>
         <div className="relative container mx-auto px-4 py-20 text-center">
-          <h1 className="text-5xl font-bold mb-6 text-white">About Connect KLE Canteen</h1>
+          <h1 className="text-5xl font-bold mb-6 text-white">About KLE Canteen</h1>
           <div className="w-24 h-1 bg-accent-400 mx-auto mb-6 rounded-full"></div>
           <p className="text-xl max-w-2xl mx-auto text-white/90">
             Streamlining food ordering at KLETECH campus with a modern, efficient solution.
@@ -37,7 +37,7 @@ const About = () => {
           <h2 className="text-4xl font-bold text-neutral-800 mb-6">Our Mission</h2>
           <div className="w-16 h-1 bg-primary-400 mx-auto mb-8 rounded-full"></div>
           <p className="text-xl text-neutral-600 leading-relaxed">
-            CanteenConnect was created to revolutionize the campus dining experience at KLE Technological University.
+            KLE Canteen was created to revolutionize the campus dining experience at KLE Technological University.
             We aim to eliminate long queues, reduce wait times, and make ordering food from campus canteens
             a seamless, enjoyable experience for students and faculty alike.
           </p>
